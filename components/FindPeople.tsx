@@ -3,11 +3,17 @@ import { useTheme } from "styled-components";
 import Friend from "./Friend";
 import * as Shared from "styles/Shared.elements";
 
-const FindPeople: FunctionComponent = () => {
+interface IFindPeople {
+	toggleMobile?: boolean;
+}
+
+const FindPeople: FunctionComponent<IFindPeople> = ({
+	toggleMobile,
+}: IFindPeople) => {
 	const { colors, fontSizes } = useTheme();
 
 	return (
-		<Shared.SideBar>
+		<Shared.SideBar toggle={toggleMobile?.toString()}>
 			<Shared.Text
 				className="sidebar-title"
 				margin="0 2rem"

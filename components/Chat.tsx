@@ -26,7 +26,7 @@ const Chat: FunctionComponent = () => {
 				<Message />
 			</Styled.Messages>
 			<Styled.Footer>
-				<Shared.Input
+				<Shared.InputInfo
 					className="message-input"
 					width="100%"
 					placeholder="Type something...."

@@ -5,7 +5,7 @@ export const Box = styled.nav`
 	background: ${({ theme: { colors } }) => colors.dark[300]};
 	height: 100%;
 	display: flex;
-	padding: 1rem 0;
+	padding: 1.5rem 0;
 	flex-direction: column;
 	flex: none;
 	justify-content: space-between;
@@ -14,7 +14,7 @@ export const Box = styled.nav`
 	border-right: 0.1rem solid ${({ theme: { colors } }) => colors.dark[500]};
 	@media screen and (max-width: 800px) {
 		width: 3.5rem;
-
+		padding: 1rem 0;
 		.avatar {
 			width: 1.5rem;
 			height: 1.5rem;
@@ -23,6 +23,7 @@ export const Box = styled.nav`
 	@media screen and (max-width: 600px) {
 		width: 100%;
 		height: 4rem;
+		z-index: 6;
 		position: sticky;
 		flex-direction: row;
 		justify-content: center;

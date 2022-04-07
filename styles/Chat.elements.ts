@@ -8,7 +8,6 @@ export const Main = styled.main`
 	gap: 2rem;
 	padding: 1rem;
 	@media screen and (min-width: 800px) {
-		padding: 2rem 3rem;
 		gap: 3rem;
 	}
 	@media screen and (max-width: 600px) {

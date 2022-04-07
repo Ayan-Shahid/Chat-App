@@ -74,6 +74,36 @@ export const Input = styled.input<IInput>`
 	}
 `;
 
+export const InputInfo = styled(Input)`
+	&:hover {
+		border-color: ${({ theme: { colors } }) => colors.info[100]};
+	}
+	&:active {
+		background: ${({ theme: { colors } }) => colors.dark[300]};
+	}
+	&:focus {
+		border-color: ${({ theme: { colors } }) => colors.info[100]};
+
+		outline: 0.2rem solid;
+		outline-color: ${({ theme: { colors } }) => colors.info[100].concat("66")};
+	}
+`;
+
+export const InputSecondary = styled(Input)`
+	&:hover {
+		border-color: ${({ theme: { colors } }) => colors.white[500]};
+	}
+	&:active {
+		background: ${({ theme: { colors } }) => colors.dark[300]};
+	}
+	&:focus {
+		border-color: ${({ theme: { colors } }) => colors.white[500]};
+
+		outline: 0.2rem solid;
+		outline-color: ${({ theme: { colors } }) => colors.white[500].concat("55")};
+	}
+`;
+
 interface IButton {
 	width?: string;
 	borderRadius?: string;
@@ -108,7 +138,11 @@ export const ButtonPrimary = styled.button<IButton>`
 	stroke: ${({ theme: { colors } }) => colors.primary[400]};
 `;
 
-export const SideBar = styled.nav`
+interface ISideBar {
+	toggle?: string;
+}
+
+export const SideBar = styled.nav<ISideBar>`
 	width: fit-content;
 	flex: none;
 	height: 100%;
@@ -134,7 +168,16 @@ export const SideBar = styled.nav`
 		gap: 1.5rem;
 	}
 	@media screen and (max-width: 600px) {
-		display: none;
+		z-index: ${({ toggle }) => (toggle === "true" ? 5 : -1)};
+		position: absolute;
+		width: 100%;
+		transition: 0.3s;
+		opacity: ${({ toggle }) => (toggle === "true" ? 1 : 0)};
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+
+		height: 80%;
 	}
 `;
 
@@ -155,12 +198,18 @@ export const Layout = styled.div`
 	background: ${({ theme: { colors } }) => colors.dark[100]};
 	.mobile-header {
 		padding: 1rem 1rem 0 1rem;
+		height: 4rem;
 		position: sticky;
 		display: none;
 		align-items: center;
 		z-index: 3;
 		top: 0;
 		justify-content: flex-end;
+	}
+
+	.mobile-header .menu-icon {
+		cursor: pointer;
+		background: none;
 	}
 
 	@media screen and (max-width: 800px) {
@@ -258,5 +307,27 @@ export const ButtonPrimarySuccess = styled(ButtonPrimary)`
 	&:focus {
 		outline: 0.2rem solid
 			${({ theme: { colors } }) => colors.success[100].concat("77")};
+	}
+`;
+
+interface ISpinner {
+	radius?: string;
+	size?: string;
+	color?: string;
+}
+
+export const Spinner = styled.article<ISpinner>`
+	width: ${({ radius }) => radius};
+	height: ${({ radius }) => radius};
+	flex: none;
+	background: none;
+	border-radius: 100%;
+	border: ${({ size }) => size} solid ${({ color }) => `${color}66`};
+	border-top-color: ${({ color }) => color};
+	animation: spin 1s linear infinite;
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
 	}
 `;
