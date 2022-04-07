@@ -1,4 +1,9 @@
-import React, { FunctionComponent, MouseEventHandler } from "react";
+import React, {
+	FunctionComponent,
+	MouseEventHandler,
+	useContext,
+	useEffect,
+} from "react";
 import * as Shared from "styles/Shared.elements";
 import * as Styled from "styles/Friend.elements";
 import Avatar from "./Avatar";
@@ -9,7 +14,7 @@ interface IFriend {
 
 const Friend: FunctionComponent<IFriend> = ({ onClick }: IFriend) => {
 	return (
-		<Styled.Box>
+		<Styled.Box as="button">
 			<Avatar size="2.5rem" />
 			<Shared.Column width="100%" gap="0.1rem">
 				<Shared.Text className="friend-name" weight={500}>

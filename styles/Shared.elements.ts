@@ -26,6 +26,7 @@ interface IDirection {
 	padding?: string;
 	width?: string;
 	height?: string;
+	background?: string;
 }
 
 export const Row = styled.article<IDirection>`
@@ -250,6 +251,7 @@ export const Box = styled(Row)`
 	justify-content: center;
 	width: ${({ width }) => width};
 	height: ${({ height }) => height};
+	background: ${({ background }) => background};
 `;
 
 export const ButtonOutline = styled(ButtonPrimary)`

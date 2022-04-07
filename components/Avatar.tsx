@@ -4,14 +4,19 @@ import * as Styled from "styles/Avatar.elements";
 
 interface IAvatar {
 	size?: string;
-	status?: "online" | "offline";
+	status?: "authenticated" | "unauthenticated" | "loading";
+	src?: string | null;
 }
 
-const Avatar: FunctionComponent<IAvatar> = ({ size, status }: IAvatar) => {
+const Avatar: FunctionComponent<IAvatar> = ({ size, status, src }: IAvatar) => {
 	return (
 		<Styled.Box className="avatar" size={size}>
-			<Styled.Status active={status === "online" ? "true" : "false"} />
-			<Male size="inherit" />
+			<Styled.Status active={status === "authenticated" ? "true" : "false"} />
+			{src ? (
+				<Styled.Picture layout="fill" src={src} />
+			) : (
+				<Male size="inherit" />
+			)}
 		</Styled.Box>
 	);
 };

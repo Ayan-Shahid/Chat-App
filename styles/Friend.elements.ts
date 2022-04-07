@@ -6,6 +6,7 @@ export const Box = styled.li`
 	cursor: pointer;
 	gap: 1rem;
 	align-items: center;
+
 	width: 100%;
 	padding: 1rem 2rem;
 	position: relative;
@@ -16,8 +17,16 @@ export const Box = styled.li`
 	&:hover {
 		background: ${({ theme: { colors } }) => colors.dark[100]};
 	}
+	&:active {
+		background: ${({ theme: { colors } }) => colors.dark[500]};
+	}
+	&:focus:not(:active) {
+		background: ${({ theme: { colors } }) => colors.dark[400]};
+	}
+
 	p {
 		user-select: none;
+		align-self: flex-start;
 	}
 	@media screen and (max-width: 800px) {
 		.friend-name {

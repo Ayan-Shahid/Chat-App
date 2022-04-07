@@ -1,3 +1,4 @@
+import { instance } from "instance";
 import NextAuth from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
@@ -15,4 +16,16 @@ export default NextAuth({
 		}),
 		// ...add more providers here
 	],
+	callbacks: {
+		signIn: async ({ user, account, profile, email, credentials }) => {
+			const data = await instance
+				.post("/user/register", {
+					username: user.name,
+					email: user.email,
+					avatar: user.image,
+				})
+				.catch(({ response: { data } }) => console.log(data));
+			return true;
+		},
+	},
 });
