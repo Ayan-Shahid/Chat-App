@@ -13,7 +13,7 @@ const TopBar: FunctionComponent<ITopBar> = ({ openMenu }: ITopBar) => {
 			<Shared.Box onClick={openMenu} as="button" className="menu-icon">
 				<Burger size="1.5rem" color="white" />
 			</Shared.Box>
-			<Avatar size="3rem" status="online" />
+			<Avatar size="3rem" />
 		</Shared.Row>
 	);
 };

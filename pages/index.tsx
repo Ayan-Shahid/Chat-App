@@ -1,57 +1,30 @@
-import {
-	Header,
-	Message,
-	NavBar,
-	Chats,
-	FindPeople,
-	Avatar,
-	TopBar,
-} from "components";
-import Chat from "components/Chat";
+import { NavBar, TopBar, Chat, Chats, Login } from "components";
+import { AppContext } from "context/AppProvider";
 import { useBoolean } from "hooks";
 import { Burger, Send } from "icons";
 import { NextPage } from "next";
-import React from "react";
+import React, { useContext } from "react";
 import { useTheme } from "styled-components";
 import * as Shared from "styles/Shared.elements";
-import { useSession, signIn } from "next-auth/react";
 
 const Index: NextPage = () => {
 	const { value: menu, toggle: toggleMenu } = useBoolean();
 
-	const { status } = useSession();
 	const { colors, borderRadius } = useTheme();
 
-	const handleSignIn = () => {
-		signIn();
-	};
+	const { state } = useContext(AppContext);
 
 	return (
 		<>
-			{status === "authenticated" ? (
+			{state.currentUser ? (
 				<Shared.Layout>
 					<TopBar openMenu={toggleMenu} />
 					<NavBar />
 					<Chats toggleMobile={menu} />
 					<Chat />
 				</Shared.Layout>
-			) : status === "loading" ? (
-				<Shared.Box background={colors.dark[100]} width="100%" height="100vh">
-					<Shared.Spinner
-						radius="2.5rem"
-						size="0.3rem"
-						color={colors.white[500]}
-					/>
-				</Shared.Box>
 			) : (
-				<Shared.Box background={colors.dark[100]} width="100%" height="100vh">
-					<Shared.ButtonPrimary
-						borderRadius={borderRadius["3xs"]}
-						onClick={handleSignIn}
-					>
-						Sign In
-					</Shared.ButtonPrimary>
-				</Shared.Box>
+				<Login />
 			)}
 		</>
 	);

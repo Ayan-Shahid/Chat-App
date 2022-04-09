@@ -4,7 +4,11 @@ import * as Styled from "styles/Header.elements";
 import { useTheme } from "styled-components";
 import Avatar from "./Avatar";
 
-const Header: FunctionComponent = () => {
+interface IHeader {
+	title?: string | null;
+}
+
+const Header: FunctionComponent<IHeader> = ({ title }: IHeader) => {
 	const { colors, fontSizes } = useTheme();
 	return (
 		<Styled.Box>
@@ -14,7 +18,7 @@ const Header: FunctionComponent = () => {
 				size={fontSizes.xl}
 				color={colors.white[100]}
 			>
-				Saad Rana
+				{title}
 			</Shared.Text>
 		</Styled.Box>
 	);

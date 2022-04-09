@@ -4,11 +4,9 @@ import { NextPage } from "next";
 import React from "react";
 import { useTheme } from "styled-components";
 import * as Shared from "styles/Shared.elements";
-import { useSession } from "next-auth/react";
 
 const Settings: NextPage = () => {
 	const { colors, fontSizes, borderRadius } = useTheme();
-	const { data, status } = useSession();
 	return (
 		<Shared.Layout>
 			<NavBar />
@@ -53,7 +51,7 @@ const Settings: NextPage = () => {
 						<Shared.Input className="settings-input" placeholder="Username" />
 					</Shared.Column>
 					<Shared.Row align="center" gap="1rem">
-						<Avatar status={status} src={data?.user?.image} size="3rem" />
+						<Avatar size="3rem" />
 						<Shared.ButtonPrimaryInfo
 							className="settings-button"
 							borderRadius={borderRadius["2xs"]}

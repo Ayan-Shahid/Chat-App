@@ -17,11 +17,27 @@ export const Box = styled.li`
 	&:hover {
 		background: ${({ theme: { colors } }) => colors.dark[100]};
 	}
+	&::before {
+		content: "";
+		width: 0;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		transition: 0.3s;
+		background: ${({ theme: { colors } }) => colors.primary[200]};
+	}
+	&:focus::before {
+		width: 0.3rem;
+	}
 	&:active {
 		background: ${({ theme: { colors } }) => colors.dark[500]};
 	}
 	&:focus:not(:active) {
-		background: ${({ theme: { colors } }) => colors.dark[400]};
+		background: linear-gradient(
+			90deg,
+			rgba(78, 50, 187, 0.4) 0%,
+			rgba(42, 42, 42, 1) 26%
+		);
 	}
 
 	p {

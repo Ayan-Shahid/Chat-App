@@ -1,7 +1,8 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useContext } from "react";
 import { useTheme } from "styled-components";
 import Friend from "./Friend";
 import * as Shared from "styles/Shared.elements";
+import { AppContext } from "context/AppProvider";
 
 interface IFindPeople {
 	toggleMobile?: boolean;
@@ -11,6 +12,9 @@ const FindPeople: FunctionComponent<IFindPeople> = ({
 	toggleMobile,
 }: IFindPeople) => {
 	const { colors, fontSizes } = useTheme();
+	const {
+		state: { users },
+	} = useContext(AppContext);
 
 	return (
 		<Shared.SideBar toggle={toggleMobile?.toString()}>
@@ -31,22 +35,9 @@ const FindPeople: FunctionComponent<IFindPeople> = ({
 				/>
 			</Shared.Row>
 			<Shared.SideBarList>
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
-				<Friend />
+				{users?.map((item) => (
+					<Friend key={item.id} {...item} />
+				))}
 			</Shared.SideBarList>
 		</Shared.SideBar>
 	);
