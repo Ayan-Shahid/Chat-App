@@ -12,7 +12,7 @@ import { updateProfile } from "firebase/auth";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-import { setUser, useFriend, useOnChange } from "hooks";
+import { setUser, useOnChange } from "hooks";
 
 import * as Shared from "styles/Shared.elements";
 import { AppContext } from "context/AppProvider";
@@ -33,8 +33,6 @@ const EditAccount: FunctionComponent = () => {
 
 	const { colors, fontSizes, borderRadius } = useTheme();
 
-	const { friend: user } = useFriend(null, currentUser?.uid);
-
 	const [file, setFile] = useState<File | null>(null);
 
 	const [saving, setSaving] = useState<boolean>(false);
@@ -44,7 +42,7 @@ const EditAccount: FunctionComponent = () => {
 	let fileRef = useRef<HTMLInputElement>(null).current;
 
 	const updateUserDoc = async () => {
-		await setUser(currentUser, user?.docId)
+		await setUser(currentUser, currentUser?.uid)
 			.then(() => setSaving(false))
 			.catch(({ message }) => {
 				setSaving(false);

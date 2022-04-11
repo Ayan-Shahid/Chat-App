@@ -1,7 +1,5 @@
 import { AppContext } from "context/AppProvider";
-import { auth, firestore } from "database/FireBase";
-import { deleteDoc, doc } from "firebase/firestore";
-import { useFriend } from "hooks";
+import { auth } from "database/FireBase";
 import { Bubble, Gear, PowerOff, Search } from "icons";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -16,11 +14,8 @@ const NavBar: FunctionComponent = () => {
 		state: { currentUser },
 	} = useContext(AppContext);
 
-	const { friend: user } = useFriend(null, currentUser?.uid);
-
 	const signOut = async () => {
 		await auth.signOut().then(async () => {
-			await deleteDoc(doc(firestore, `Users/${user?.docId}`));
 			router.push("/");
 		});
 	};

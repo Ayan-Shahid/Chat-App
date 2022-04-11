@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	reactStrictMode: true,
@@ -5,7 +6,11 @@ const nextConfig = {
 		styledComponents: true,
 	},
 	images: {
-		domains: ["lh3.googleusercontent.com", "firebasestorage.googleapis.com"],
+		domains: [
+			"lh3.googleusercontent.com",
+			"firebasestorage.googleapis.com",
+			"avatars.githubusercontent.com",
+		],
 	},
 };
 

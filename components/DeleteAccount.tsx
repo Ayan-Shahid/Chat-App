@@ -9,14 +9,11 @@ import { useRouter } from "next/router";
 import React, { FunctionComponent, useContext, useState } from "react";
 import { useTheme } from "styled-components";
 import * as Shared from "styles/Shared.elements";
-import { useFriend } from "hooks";
 
 const DeleteAccount: FunctionComponent = () => {
 	const {
 		state: { currentUser },
 	} = useContext(AppContext);
-
-	const { friend: user } = useFriend(null, currentUser?.uid);
 
 	const { colors, fontSizes, borderRadius } = useTheme();
 
@@ -33,7 +30,7 @@ const DeleteAccount: FunctionComponent = () => {
 					await currentUser
 						?.delete()
 						.then(async () => {
-							await deleteDoc(doc(firestore, `Users/${user?.docId}`));
+							await deleteDoc(doc(firestore, `Users/${currentUser.uid}`));
 							setIsDeleting(false);
 							router.push("/");
 						})

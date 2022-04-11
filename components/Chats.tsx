@@ -11,8 +11,16 @@ interface IChats {
 const Chats: FunctionComponent<IChats> = ({ toggleMobile }: IChats) => {
 	const { fontSizes } = useTheme();
 	const {
-		state: { conversations },
+		state: { conversations, currentUser },
 	} = useContext(AppContext);
+
+	const myConversations = () => {
+		if (currentUser) {
+			return conversations?.filter((item) =>
+				item.users.includes(currentUser.uid)
+			);
+		}
+	};
 
 	return (
 		<Shared.SideBar toggle={toggleMobile?.toString()}>
@@ -25,7 +33,7 @@ const Chats: FunctionComponent<IChats> = ({ toggleMobile }: IChats) => {
 				Chats
 			</Shared.Text>
 			<Shared.SideBarList>
-				{conversations?.map((item) => (
+				{myConversations()?.map((item) => (
 					<Conversation key={item.id} {...item} />
 				))}
 			</Shared.SideBarList>

@@ -1,34 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Chaty
 
-## Getting Started
+A chat application for messaging.
 
-First, run the development server:
+## Features
+
+- Private Messaging
+- Realtime
+- Responsive
+- Google Login
+- GitHub Login
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`GITHUB_ID`
+
+`GITHUB_SECRET`
+
+`GOOGLE_CLIENT_ID`
+
+`GOOGLE_CLIENT_SECRET`
+
+`NEXT_PUBLIC_FIREBASE_API_KEY`
+
+`NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN`
+
+`NEXT_PUBLIC_FIREBASE_PROJECT_ID`
+
+`NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET`
+
+`NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID`
+
+`NEXT_PUBLIC_FIREBASE_APP_ID`
+
+`NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID`
+
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://github.com/Ayan-Shahid/Chat-App.git
+```
+
+Install dependencies
+
+```bash
+  npm install
+```
+
+Start the server
+
+```bash
+  npm run dev
+```
+
+or
+
+```bash
+  yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Screenshots
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+![Screenshot 2022-04-11 at 21-38-46 Screenshot](https://user-images.githubusercontent.com/63579232/162791728-f9fbb776-37ac-4b47-89dd-0a11c98696e9.png)
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+![Screenshot 2022-04-11 at 21-39-02 Screenshot](https://user-images.githubusercontent.com/63579232/162791769-347d8289-1bd1-49f6-8a0c-1c4d8d2ae5d3.png)
 
-## Learn More
+![Screenshot 2022-04-11 at 21-40-07 Screenshot](https://user-images.githubusercontent.com/63579232/162791837-2a42df07-3461-4388-af28-61a48aea7066.png)
 
-To learn more about Next.js, take a look at the following resources:
+![Screenshot 2022-04-11 at 21-40-30 Screenshot](https://user-images.githubusercontent.com/63579232/162791865-506680a3-65fc-4c36-8c7e-640faab1a2ea.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Tech Stack
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Client:** Next JS, Styled Components, Firebase

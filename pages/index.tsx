@@ -8,11 +8,13 @@ import * as Shared from "styles/Shared.elements";
 const Index: NextPage = () => {
 	const { value: menu, toggle: toggleMenu } = useBoolean();
 
-	const { state } = useContext(AppContext);
+	const {
+		state: { currentUser },
+	} = useContext(AppContext);
 
 	return (
 		<>
-			{state.currentUser ? (
+			{currentUser ? (
 				<Shared.Layout>
 					<TopBar openMenu={toggleMenu} />
 					<NavBar />
