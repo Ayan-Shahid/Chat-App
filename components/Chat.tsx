@@ -1,14 +1,15 @@
 import { AppContext } from "context/AppProvider";
 import { firestore } from "database/FireBase";
-import { collection, onSnapshot } from "firebase/firestore";
-import { useFriend } from "hooks";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useFriend, useOnChange } from "hooks";
 import { Send } from "icons";
 import Image from "next/image";
 import React, {
 	FunctionComponent,
+	KeyboardEvent,
 	useContext,
 	useEffect,
-	useState,
+	useRef,
 } from "react";
 import { useTheme } from "styled-components";
 import * as Styled from "styles/Chat.elements";
@@ -18,12 +19,40 @@ import Message from "./Message";
 
 const Chat: FunctionComponent = () => {
 	const { colors, fontSizes } = useTheme();
+	const {
+		text: message,
+		setText: setMessage,
+		handleText: handleMessage,
+	} = useOnChange();
+	let scrollRef = useRef<HTMLElement>(null).current;
 
 	const {
-		state: { conversation, currentUser },
+		state: { conversation, currentUser, messages },
 	} = useContext(AppContext);
 
-	const { friend, friendId } = useFriend(conversation?.users);
+	const { friend } = useFriend(conversation?.users);
+
+	const sendMessage = async () => {
+		if (message.length > 0) {
+			await addDoc(collection(firestore, "Messages"), {
+				conversationId: conversation?.id,
+				userId: currentUser?.uid,
+				text: message,
+				timeStamp: serverTimestamp(),
+			});
+			setMessage("");
+		}
+	};
+
+	const keyboardMessage = (event: KeyboardEvent<HTMLInputElement>) => {
+		if (event.key === "Enter") {
+			sendMessage();
+		}
+	};
+
+	useEffect(() => {
+		scrollRef?.scrollIntoView({ behavior: "smooth" });
+	}, [messages]);
 
 	return (
 		<Styled.Main>
@@ -31,15 +60,28 @@ const Chat: FunctionComponent = () => {
 				<>
 					<Header title={friend?.username} />
 					<Styled.Messages>
-						<Message />
+						{messages
+							?.filter((item) => item.conversationId === conversation.id)
+							?.map((item) => (
+								<Shared.Row ref={(ref) => (scrollRef = ref)} key={item.key}>
+									<Message {...item} />
+								</Shared.Row>
+							))}
 					</Styled.Messages>
 					<Styled.Footer>
 						<Shared.InputInfo
+							onChange={handleMessage}
+							onKeyDown={keyboardMessage}
+							value={message}
 							className="message-input"
 							width="100%"
 							placeholder="Type something...."
 						/>
-						<Shared.ButtonPrimary className="send-button" borderRadius="100%">
+						<Shared.ButtonPrimary
+							onClick={sendMessage}
+							className="send-button"
+							borderRadius="100%"
+						>
 							<Send size="inherit" />
 						</Shared.ButtonPrimary>
 					</Styled.Footer>

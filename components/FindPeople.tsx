@@ -11,7 +11,7 @@ interface IFindPeople {
 const FindPeople: FunctionComponent<IFindPeople> = ({
 	toggleMobile,
 }: IFindPeople) => {
-	const { colors, fontSizes } = useTheme();
+	const { fontSizes } = useTheme();
 	const {
 		state: { users },
 	} = useContext(AppContext);

@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { IIcon } from "./Send";
 
 const Edit: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
@@ -37,4 +37,4 @@ const Edit: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default Edit;
+export default memo(Edit);

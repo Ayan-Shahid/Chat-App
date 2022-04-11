@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { IIcon } from "./Send";
 
 const Trash: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
@@ -35,4 +35,4 @@ const Trash: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default Trash;
+export default memo(Trash);

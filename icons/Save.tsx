@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { IIcon } from "./Send";
 
 const Save: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
@@ -29,4 +29,4 @@ const Save: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default Save;
+export default memo(Save);

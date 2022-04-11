@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { IIcon } from "./Send";
 
 const PowerOff: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
@@ -37,4 +37,4 @@ const PowerOff: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default PowerOff;
+export default memo(PowerOff);

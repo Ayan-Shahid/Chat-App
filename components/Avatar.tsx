@@ -4,7 +4,7 @@ import * as Styled from "styles/Avatar.elements";
 
 interface IAvatar {
 	size?: string;
-	status?: "authenticated" | "unauthenticated" | "loading";
+	status?: "authenticated" | "unauthenticated";
 	src?: string | null;
 }
 

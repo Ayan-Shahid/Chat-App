@@ -1,5 +1,6 @@
-import { auth } from "database/FireBase";
+import { auth, firestore } from "database/FireBase";
 import { onAuthStateChanged } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 import React, {
 	createContext,
 	FunctionComponent,
@@ -30,30 +31,38 @@ const AppProvider: FunctionComponent = ({ children }) => {
 		conversation: null,
 	});
 
+	// const setSignedInUser = async (data: User) => {
+	// 	if (data && user?.docId) return;
+
+	// 	await addDoc(collection(firestore, "Users"), {
+	// 		username: data.displayName,
+	// 		avatar: data.photoURL,
+	// 		id: data.uid,
+	// 	});
+	// };
+
 	useEffect(() => {
 		let isMounted = true;
+		let unsubscribe;
 
 		if (isMounted) {
 			updateUsers(dispatch);
 			updateConversations(dispatch);
 			updateMessages(dispatch);
-			let unsubscribe;
-
-			unsubscribe = onAuthStateChanged(auth, (user) => {
-				dispatch({
-					type: "SET_USER",
-					payload: {
-						currentUser: user,
-						conversation: null,
-						conversations: null,
-						messages: null,
-						users: null,
-					},
-				});
-			});
-
-			return unsubscribe;
 		}
+		unsubscribe = onAuthStateChanged(auth, (user) => {
+			dispatch({
+				type: "SET_USER",
+				payload: {
+					currentUser: user,
+					conversation: null,
+					conversations: null,
+					messages: null,
+					users: null,
+				},
+			});
+		});
+		return unsubscribe;
 	}, []);
 	return (
 		<AppContext.Provider value={{ state, dispatch }}>

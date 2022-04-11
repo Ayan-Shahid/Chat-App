@@ -76,6 +76,7 @@ export const FriendBubble = styled(UserBubble)`
 export const Box = styled.article`
 	display: flex;
 	gap: 1rem;
+	flex: 1;
 	@media screen and (min-width: 800px) {
 		.avatar {
 			width: 2rem;

@@ -1,4 +1,6 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 import { User } from "firebase/auth";
+import { Timestamp } from "firebase/firestore";
 import { Dispatch } from "react";
 
 export type ReducerStateType = {
@@ -21,6 +23,7 @@ export type ReducerStateType = {
 				userId: string;
 				text: string;
 				key: string;
+				timeStamp: Timestamp;
 		  }[]
 		| null;
 };

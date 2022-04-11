@@ -1,4 +1,5 @@
-import styled from "styled-components";
+/* eslint-disable indent */
+import styled, { css } from "styled-components";
 
 interface IText {
 	family?: string;
@@ -213,6 +214,11 @@ export const Layout = styled.div`
 		background: none;
 	}
 
+	.settings-input:invalid {
+		border-color: ${({ theme: { colors } }) => colors.error[200]};
+		outline-color: ${({ theme: { colors } }) => colors.error[200].concat("88")};
+	}
+
 	@media screen and (max-width: 800px) {
 		.settings-heading {
 			font-size: ${({ theme: { fontSizes } }) => fontSizes.lg};
@@ -310,6 +316,11 @@ export const ButtonPrimarySuccess = styled(ButtonPrimary)`
 		outline: 0.2rem solid
 			${({ theme: { colors } }) => colors.success[100].concat("77")};
 	}
+	&:disabled {
+		background: ${({ theme: { colors } }) => colors.success[500]};
+
+		cursor: not-allowed;
+	}
 `;
 
 interface ISpinner {
@@ -334,22 +345,23 @@ export const Spinner = styled.article<ISpinner>`
 	}
 `;
 
-export const ListItem = styled.li`
-	display: flex;
-	cursor: pointer;
-	gap: 1rem;
-	align-items: center;
-
-	width: 100%;
-	padding: 1rem 2rem;
-	position: relative;
-	color: ${({ theme: { colors } }) => colors.white[100]};
-
-	transition: 0.3s;
-	background: none;
-	&:hover {
-		background: ${({ theme: { colors } }) => colors.dark[100]};
+const ActiveListItem = css`
+	&::before {
+		content: "";
+		width: 0.3rem;
+		height: 100%;
+		position: absolute;
+		left: 0;
+		transition: 0.3s;
+		background: ${({ theme: { colors } }) => colors.primary[200]};
 	}
+	background: linear-gradient(
+		90deg,
+		rgba(78, 50, 187, 0.4) 0%,
+		rgba(42, 42, 42, 1) 26%
+	);
+`;
+const InActiveListItem = css`
 	&::before {
 		content: "";
 		width: 0;
@@ -359,6 +371,26 @@ export const ListItem = styled.li`
 		transition: 0.3s;
 		background: ${({ theme: { colors } }) => colors.primary[200]};
 	}
+	background: none;
+`;
+
+export const ListItem = styled.li<{ active?: "true" | "false" }>`
+	display: flex;
+	cursor: pointer;
+	gap: 1rem;
+	align-items: center;
+	width: 100%;
+	padding: 1rem 2rem;
+	position: relative;
+	color: ${({ theme: { colors } }) => colors.white[100]};
+
+	${({ active }) => (active === "true" ? ActiveListItem : InActiveListItem)}
+
+	transition: 0.3s;
+	&:hover {
+		background: ${({ theme: { colors } }) => colors.dark[100]};
+	}
+
 	&:focus::before {
 		width: 0.3rem;
 	}
@@ -395,7 +427,7 @@ export const ListItemTitle = styled(Text)`
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
-	width: 5rem;
+	max-width: 5rem;
 	font-size: ${({ theme: { fontSizes } }) => fontSizes.sm};
 	font-weight: 100;
 	@media screen and (max-width: 800px) {
@@ -411,4 +443,8 @@ export const ListItemText = styled(Text)`
 	@media screen and (max-width: 800px) {
 		font-size: ${({ theme: { fontSizes } }) => fontSizes["2xs"]};
 	}
+`;
+
+export const FileInput = styled.input`
+	display: none;
 `;

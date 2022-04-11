@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { IIcon } from "./Send";
 
 const Burger: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
@@ -26,4 +26,4 @@ const Burger: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default Burger;
+export default memo(Burger);

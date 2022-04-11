@@ -9,7 +9,7 @@ interface IChats {
 }
 
 const Chats: FunctionComponent<IChats> = ({ toggleMobile }: IChats) => {
-	const { colors, fontSizes } = useTheme();
+	const { fontSizes } = useTheme();
 	const {
 		state: { conversations },
 	} = useContext(AppContext);

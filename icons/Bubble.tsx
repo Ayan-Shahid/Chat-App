@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { IIcon } from "./Send";
 
 const Bubble: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
@@ -44,4 +44,4 @@ const Bubble: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default Bubble;
+export default memo(Bubble);

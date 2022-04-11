@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 
 export interface IIcon {
 	size?: string;
@@ -34,4 +34,4 @@ const Send: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default Send;
+export default memo(Send);

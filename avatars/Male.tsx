@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 
 interface IMale {
 	size?: string;
@@ -142,4 +142,4 @@ const Male: FunctionComponent<IMale> = ({ size }: IMale) => {
 	);
 };
 
-export default Male;
+export default memo(Male);

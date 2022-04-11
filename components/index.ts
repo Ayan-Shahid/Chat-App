@@ -9,3 +9,6 @@ export { default as FindPeople } from "./FindPeople";
 export { default as TopBar } from "./TopBar";
 export { default as Conversation } from "./Conversation";
 export { default as Login } from "./Login";
+export { default as SettingsHeader } from "./SettingsHeader";
+export { default as EditAccount } from "./EditAccount";
+export { default as FormInput } from "./FormInput";

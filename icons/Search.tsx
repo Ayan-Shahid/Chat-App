@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import { IIcon } from "./Send";
 
 const Search: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
@@ -32,4 +32,4 @@ const Search: FunctionComponent<IIcon> = ({ size, color }: IIcon) => {
 	);
 };
 
-export default Search;
+export default memo(Search);

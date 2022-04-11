@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, memo } from "react";
 import * as Shared from "styles/Shared.elements";
 import * as Styled from "styles/Header.elements";
 import { useTheme } from "styled-components";
@@ -24,4 +24,4 @@ const Header: FunctionComponent<IHeader> = ({ title }: IHeader) => {
 	);
 };
 
-export default Header;
+export default memo(Header);

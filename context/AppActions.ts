@@ -1,10 +1,10 @@
 import { Dispatch } from "react";
 import { firestore } from "database/FireBase";
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { DispatchType } from "types/appContext";
 
 export const updateUsers = (dispatch: Dispatch<DispatchType>) => {
-	const users = onSnapshot(collection(firestore, "Users"), ({ docs }) => {
+	onSnapshot(collection(firestore, "Users"), ({ docs }) => {
 		const data = docs.map((item) => {
 			return {
 				username: item.get("username"),
@@ -26,52 +26,52 @@ export const updateUsers = (dispatch: Dispatch<DispatchType>) => {
 };
 
 export const updateConversations = (dispatch: Dispatch<DispatchType>) => {
-	const users = onSnapshot(
-		collection(firestore, "Conversations"),
-		({ docs }) => {
-			const data = docs.map((item) => {
-				return {
-					users: item.get("users"),
-					id: item.id,
-				};
-			});
-			dispatch({
-				type: "UPDATE_CONVERSATIONS",
-				payload: {
-					currentUser: null,
-
-					users: null,
-					conversation: null,
-					conversations: data,
-					messages: null,
-				},
-			});
-		}
-	);
-};
-
-export const updateMessages = (dispatch: Dispatch<DispatchType>) => {
-	const users = onSnapshot(collection(firestore, "Messages"), ({ docs }) => {
+	onSnapshot(collection(firestore, "Conversations"), ({ docs }) => {
 		const data = docs.map((item) => {
 			return {
-				conversationId: item.get("conversationId"),
-				userId: item.get("userId"),
-				text: item.get("text"),
-				key: item.id,
+				users: item.get("users"),
+				id: item.id,
 			};
 		});
 		dispatch({
-			type: "UPDATE_MESSAGES",
+			type: "UPDATE_CONVERSATIONS",
 			payload: {
 				currentUser: null,
 
 				users: null,
 				conversation: null,
-				conversations: null,
-				messages: data,
+				conversations: data,
+				messages: null,
 			},
 		});
 	});
+};
+
+export const updateMessages = (dispatch: Dispatch<DispatchType>) => {
+	onSnapshot(
+		query(collection(firestore, "Messages"), orderBy("timeStamp")),
+		({ docs }) => {
+			const data = docs.map((item) => {
+				return {
+					conversationId: item.get("conversationId"),
+					userId: item.get("userId"),
+					text: item.get("text"),
+					key: item.id,
+					timeStamp: item.get("timeStamp"),
+				};
+			});
+			dispatch({
+				type: "UPDATE_MESSAGES",
+				payload: {
+					currentUser: null,
+					users: null,
+					conversation: null,
+					conversations: null,
+					messages: data,
+				},
+			});
+		}
+	);
 };
 
 export const setConversation = (
