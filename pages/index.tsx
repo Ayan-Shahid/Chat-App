@@ -15,20 +15,17 @@ const Index: NextPage = () => {
 
 	return (
 		<>
+			<Head>
+				<title>Chaty</title>
+				<meta name="title" content="Chaty" />
+				<meta
+					name="description"
+					content="A chat application for messaging users."
+				/>
+				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+			</Head>
 			{currentUser ? (
 				<Shared.Layout>
-					<Head>
-						<title>Chaty</title>
-						<meta name="title" content="Chaty" />
-						<meta
-							name="description"
-							content="A chat application for messaging users."
-						/>
-						<meta
-							name="viewport"
-							content="width=device-width, initial-scale=1.0"
-						/>
-					</Head>
 					<TopBar openMenu={toggleMenu} />
 					<NavBar />
 					<Chats toggleMobile={menu} />
