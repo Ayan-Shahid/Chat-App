@@ -1,5 +1,4 @@
-import { FindPeople, NavBar, TopBar } from "components";
-import Chat from "components/Chat";
+import { FindPeople, NavBar, TopBar, Chat } from "components";
 import { useBoolean } from "hooks";
 import { NextPage } from "next";
 import { Head } from "next/document";
