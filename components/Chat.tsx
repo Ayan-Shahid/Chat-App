@@ -99,7 +99,12 @@ const Chat: FunctionComponent = () => {
 						<Shared.Text size={fontSizes.base} color={colors.white[500]}>
 							Choose one from your existing chats.
 						</Shared.Text>
-						<Image width="400rem" height="400rem" src="/images/Saly-16.png" />
+						<Image
+							width="400rem"
+							height="400rem"
+							alt="no-chat"
+							src="/images/Saly-16.png"
+						/>
 					</Shared.Column>
 				</Shared.Box>
 			)}

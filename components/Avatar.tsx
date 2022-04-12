@@ -13,7 +13,7 @@ const Avatar: FunctionComponent<IAvatar> = ({ size, status, src }: IAvatar) => {
 		<Styled.Box className="avatar" size={size}>
 			<Styled.Status active={status === "authenticated" ? "true" : "false"} />
 			{src ? (
-				<Styled.Picture layout="fill" src={src} />
+				<Styled.Picture alt="avatar" layout="fill" src={src} />
 			) : (
 				<Male size="inherit" />
 			)}
