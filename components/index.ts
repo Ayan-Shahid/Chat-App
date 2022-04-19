@@ -12,3 +12,4 @@ export { default as Login } from "./Login";
 export { default as SettingsHeader } from "./SettingsHeader";
 export { default as EditAccount } from "./EditAccount";
 export { default as FormInput } from "./FormInput";
+export { default as Player } from "./Player";

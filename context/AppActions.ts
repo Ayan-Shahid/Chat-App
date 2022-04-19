@@ -57,6 +57,7 @@ export const updateMessages = (dispatch: Dispatch<DispatchType>) => {
 					userId: item.get("userId"),
 					text: item.get("text"),
 					key: item.id,
+					voice: item.get("voice"),
 					timeStamp: item.get("timeStamp"),
 				};
 			});

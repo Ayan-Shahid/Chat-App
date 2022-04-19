@@ -1,3 +1,4 @@
+import { Player } from "components";
 import { AppContext } from "context/AppProvider";
 import { Timestamp } from "firebase/firestore";
 import { useFriend, useMinute } from "hooks";
@@ -11,6 +12,7 @@ interface IMessage {
 	isUser?: boolean;
 	text?: string | null;
 	userId?: string | null;
+	voice?: string | null;
 	timeStamp?: Timestamp | null;
 }
 
@@ -18,6 +20,7 @@ const Message: FunctionComponent<IMessage> = ({
 	text,
 	userId,
 	timeStamp,
+	voice,
 }: IMessage) => {
 	const {
 		state: { currentUser },
@@ -35,7 +38,9 @@ const Message: FunctionComponent<IMessage> = ({
 			<Styled.UserBox>
 				<Shared.Column gap="1rem">
 					<Shared.Row gap="1rem" width="100%">
-						<Styled.UserBubble>{text}</Styled.UserBubble>
+						<Styled.UserBubble>
+							{text} {voice && voice !== "" ? <Player src={voice} /> : null}
+						</Styled.UserBubble>
 						<Avatar src={friend?.avatar} size="1.5rem" />
 					</Shared.Row>
 					<Shared.Text
@@ -53,7 +58,10 @@ const Message: FunctionComponent<IMessage> = ({
 			<Shared.Column align="flex-end" gap="1rem">
 				<Shared.Row gap="1rem" width="100%">
 					<Avatar src={friend?.avatar} size="1.5rem" />
-					<Styled.FriendBubble>{text}</Styled.FriendBubble>
+					<Styled.FriendBubble>
+						{text}
+						{voice && voice !== "" ? <Player src={voice} /> : null}
+					</Styled.FriendBubble>
 				</Shared.Row>
 				<Shared.Text weight={700} size={fontSizes.sm} color={colors.white[500]}>
 					{time}

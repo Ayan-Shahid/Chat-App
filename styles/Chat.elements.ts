@@ -34,7 +34,8 @@ export const Footer = styled.footer`
 	.message-input {
 		font-size: ${({ theme: { fontSizes } }) => fontSizes.sm};
 	}
-	.send-button .send-icon {
+	.send-button .send-icon,
+	.mike-button .mike-icon {
 		width: 1rem;
 		height: 1rem;
 	}
@@ -43,7 +44,8 @@ export const Footer = styled.footer`
 		.message-input {
 			font-size: ${({ theme: { fontSizes } }) => fontSizes.lg};
 		}
-		.send-button .send-icon {
+		.send-button .send-icon,
+		.mike-button .mike-icon {
 			width: 1.5rem;
 			height: 1.5rem;
 		}

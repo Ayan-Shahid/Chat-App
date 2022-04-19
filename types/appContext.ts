@@ -23,6 +23,7 @@ export type ReducerStateType = {
 				userId: string;
 				text: string;
 				key: string;
+				voice?: string | null;
 				timeStamp: Timestamp;
 		  }[]
 		| null;

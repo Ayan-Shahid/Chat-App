@@ -8,3 +8,6 @@ export { default as Edit } from "./Edit";
 export { default as Save } from "./Save";
 export { default as Burger } from "./Burger";
 export { default as Error } from "./Error";
+export { default as Mike } from "./Mike";
+export { default as Play } from "./Play";
+export { default as Pause } from "./Pause";

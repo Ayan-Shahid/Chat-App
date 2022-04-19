@@ -1,8 +1,8 @@
 import { AppContext } from "context/AppProvider";
 import { firestore } from "database/FireBase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
-import { useFriend, useOnChange } from "hooks";
-import { Send } from "icons";
+import { useFriend, useOnChange, useRecorder } from "hooks";
+import { Mike, Send } from "icons";
 import Image from "next/image";
 import React, {
 	FunctionComponent,
@@ -31,6 +31,19 @@ const Chat: FunctionComponent = () => {
 	} = useContext(AppContext);
 
 	const { friend } = useFriend(conversation?.users);
+
+	const { state: recorderState, start, stop } = useRecorder();
+
+	const sendVoiceMessage = async () => {
+		stop();
+		if (recorderState.audio && recorderState.audio !== "")
+			await addDoc(collection(firestore, "Messages"), {
+				conversationId: conversation?.id,
+				userId: currentUser?.uid,
+				voice: recorderState.audio,
+				timeStamp: serverTimestamp(),
+			});
+	};
 
 	const sendMessage = async () => {
 		if (message.length > 0) {
@@ -68,6 +81,7 @@ const Chat: FunctionComponent = () => {
 								</Shared.Row>
 							))}
 					</Styled.Messages>
+
 					<Styled.Footer>
 						<Shared.InputInfo
 							onChange={handleMessage}
@@ -77,6 +91,24 @@ const Chat: FunctionComponent = () => {
 							width="100%"
 							placeholder="Type something...."
 						/>
+
+						{recorderState.init ? (
+							<Shared.ButtonPrimaryDanger
+								onClick={sendVoiceMessage}
+								className="mike-button"
+								borderRadius="100%"
+							>
+								<Mike color={colors.white[100]} size="inherit" />
+							</Shared.ButtonPrimaryDanger>
+						) : (
+							<Shared.ButtonOutline
+								onClick={start}
+								className="mike-button"
+								borderRadius="100%"
+							>
+								<Mike color={colors.white[500]} size="inherit" />
+							</Shared.ButtonOutline>
+						)}
 						<Shared.ButtonPrimary
 							onClick={sendMessage}
 							className="send-button"
@@ -100,8 +132,8 @@ const Chat: FunctionComponent = () => {
 							Choose one from your existing chats.
 						</Shared.Text>
 						<Image
-							width="400rem"
-							height="400rem"
+							width="400"
+							height="400"
 							alt="no-chat"
 							src="/images/Saly-16.png"
 						/>
