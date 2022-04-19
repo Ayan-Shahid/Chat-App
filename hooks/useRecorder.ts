@@ -6,7 +6,7 @@ const useRecorder = () => {
 		init?: boolean;
 		stream?: MediaStream | null;
 		recorder?: MediaRecorder | null;
-		audio?: string | null;
+		audio?: Blob | null;
 	}>({
 		minutes: 0,
 		seconds: 0,
@@ -76,7 +76,7 @@ const useRecorder = () => {
 					if (prevState.recorder)
 						return {
 							...prevState,
-							audio: URL.createObjectURL(blob),
+							audio: blob,
 						};
 					else return prevState;
 				});

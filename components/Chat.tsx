@@ -1,6 +1,7 @@
 import { AppContext } from "context/AppProvider";
-import { firestore } from "database/FireBase";
+import { firestore, storage } from "database/FireBase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { useFriend, useOnChange, useRecorder } from "hooks";
 import { Mike, Send } from "icons";
 import Image from "next/image";
@@ -36,13 +37,20 @@ const Chat: FunctionComponent = () => {
 
 	const sendVoiceMessage = async () => {
 		stop();
-		if (recorderState.audio && recorderState.audio !== "")
-			await addDoc(collection(firestore, "Messages"), {
-				conversationId: conversation?.id,
-				userId: currentUser?.uid,
-				voice: recorderState.audio,
-				timeStamp: serverTimestamp(),
+		if (recorderState.audio) {
+			const uploadAudio = await uploadBytes(
+				ref(storage, `audio/${Date.now()}`),
+				recorderState.audio
+			);
+			await getDownloadURL(uploadAudio.ref).then(async (url) => {
+				await addDoc(collection(firestore, "Messages"), {
+					conversationId: conversation?.id,
+					userId: currentUser?.uid,
+					voice: url,
+					timeStamp: serverTimestamp(),
+				});
 			});
+		}
 	};
 
 	const sendMessage = async () => {
