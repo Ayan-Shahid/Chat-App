@@ -23,8 +23,8 @@ const useRecorder = () => {
 			setState((prevState) => {
 				return {
 					...prevState,
-					init: true,
 					stream,
+					init: true,
 				};
 			});
 		} catch (error) {
@@ -33,7 +33,7 @@ const useRecorder = () => {
 	};
 
 	const stop = async () => {
-		if (state.recorder?.state !== "inactive") {
+		if (state.recorder && state.recorder?.state !== "inactive") {
 			state.recorder?.stop();
 			setState((prevState) => {
 				return {
@@ -61,7 +61,7 @@ const useRecorder = () => {
 		const recorder = state.recorder;
 
 		let chunks: BlobPart[] | undefined = [];
-		if (recorder && recorder?.state === "inactive") {
+		if (recorder && recorder.state === "inactive") {
 			recorder.start();
 
 			recorder.ondataavailable = (event) => {
@@ -82,6 +82,7 @@ const useRecorder = () => {
 				});
 			};
 		}
+
 		return () => {
 			if (recorder)
 				recorder.stream.getAudioTracks().forEach((track) => track.stop());
