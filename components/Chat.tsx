@@ -85,7 +85,7 @@ const Chat: FunctionComponent = () => {
 							?.filter((item) => item.conversationId === conversation.id)
 							?.map((item) => (
 								<Shared.Row ref={(ref) => (scrollRef = ref)} key={item.key}>
-									<Message {...item} />
+									<Message friendAvatar={friend?.avatar} {...item} />
 								</Shared.Row>
 							))}
 					</Styled.Messages>

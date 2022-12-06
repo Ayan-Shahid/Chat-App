@@ -1,7 +1,7 @@
 import { Player } from "components";
 import { AppContext } from "context/AppProvider";
 import { Timestamp } from "firebase/firestore";
-import { useFriend, useMinute } from "hooks";
+import { useMinute } from "hooks";
 import React, { FunctionComponent, useContext } from "react";
 import { useTheme } from "styled-components";
 import * as Styled from "styles/Message.elements";
@@ -14,6 +14,7 @@ interface IMessage {
 	userId?: string | null;
 	voice?: string | null;
 	timeStamp?: Timestamp | null;
+	friendAvatar?: string | null;
 }
 
 const Message: FunctionComponent<IMessage> = ({
@@ -21,17 +22,14 @@ const Message: FunctionComponent<IMessage> = ({
 	userId,
 	timeStamp,
 	voice,
+	friendAvatar,
 }: IMessage) => {
 	const {
-		state: { currentUser, users },
+		state: { currentUser },
 	} = useContext(AppContext);
 	const isUser = currentUser?.uid === userId ? true : false;
 
 	const { colors, fontSizes } = useTheme();
-
-	const usersIds = users?.map((item) => item.id);
-
-	const { friend } = useFriend(usersIds, null);
 
 	const { time } = useMinute(timeStamp?.toMillis());
 
@@ -43,7 +41,7 @@ const Message: FunctionComponent<IMessage> = ({
 						<Styled.UserBubble>
 							{text} {voice && voice !== "" ? <Player src={voice} /> : null}
 						</Styled.UserBubble>
-						<Avatar src={friend?.avatar} size="1.5rem" />
+						<Avatar src={currentUser?.photoURL} size="1.5rem" />
 					</Shared.Row>
 					<Shared.Text
 						weight={700}
@@ -59,7 +57,7 @@ const Message: FunctionComponent<IMessage> = ({
 		<Styled.Box>
 			<Shared.Column align="flex-end" gap="1rem">
 				<Shared.Row gap="1rem" width="100%">
-					<Avatar src={currentUser?.photoURL} size="1.5rem" />
+					<Avatar src={friendAvatar} size="1.5rem" />
 					<Styled.FriendBubble>
 						{text}
 						{voice && voice !== "" ? <Player src={voice} /> : null}
