@@ -77,7 +77,7 @@ const EditAccount: FunctionComponent = () => {
 	};
 
 	const saveUser = async () => {
-		if (file && username.length > 0 && currentUser) {
+		if (file && currentUser) {
 			setSaving(true);
 			const uploadFile = await uploadBytes(ref(storage, "profile"), file);
 			await getDownloadURL(uploadFile.ref).then((url) =>
@@ -91,6 +91,16 @@ const EditAccount: FunctionComponent = () => {
 						toast.error(message);
 					})
 			);
+		} else if (username.length > 0 && currentUser) {
+			setSaving(true);
+			updateProfile(currentUser, {
+				displayName: username,
+			})
+				.then(() => updateUserDoc())
+				.catch(({ message }) => {
+					setSaving(false);
+					toast.error(message);
+				});
 		}
 	};
 
