@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { DefaultTheme, ThemeProvider } from "styled-components";
+import { ThemeProvider } from "styled-components";
 
 type Color = {
 	100: string;

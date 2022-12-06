@@ -79,7 +79,7 @@ const Chat: FunctionComponent = () => {
 		<Styled.Main>
 			{conversation ? (
 				<>
-					<Header title={friend?.username} />
+					<Header title={friend?.username} src={friend?.avatar} />
 					<Styled.Messages>
 						{messages
 							?.filter((item) => item.conversationId === conversation.id)

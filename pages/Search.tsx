@@ -18,7 +18,7 @@ const Search: NextPage = () => {
 			</Head>
 			<Shared.Layout>
 				<TopBar openMenu={toggleMenu} />
-				<NavBar />
+				<NavBar toggleMobileMenu={toggleMenu} />
 				<FindPeople toggleMobile={menu} />
 				<Chat />
 			</Shared.Layout>

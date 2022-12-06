@@ -23,13 +23,15 @@ const Message: FunctionComponent<IMessage> = ({
 	voice,
 }: IMessage) => {
 	const {
-		state: { currentUser },
+		state: { currentUser, users },
 	} = useContext(AppContext);
 	const isUser = currentUser?.uid === userId ? true : false;
 
 	const { colors, fontSizes } = useTheme();
 
-	const { friend } = useFriend(null, userId);
+	const usersIds = users?.map((item) => item.id);
+
+	const { friend } = useFriend(usersIds, null);
 
 	const { time } = useMinute(timeStamp?.toMillis());
 
@@ -57,7 +59,7 @@ const Message: FunctionComponent<IMessage> = ({
 		<Styled.Box>
 			<Shared.Column align="flex-end" gap="1rem">
 				<Shared.Row gap="1rem" width="100%">
-					<Avatar src={friend?.avatar} size="1.5rem" />
+					<Avatar src={currentUser?.photoURL} size="1.5rem" />
 					<Styled.FriendBubble>
 						{text}
 						{voice && voice !== "" ? <Player src={voice} /> : null}

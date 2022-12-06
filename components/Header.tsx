@@ -6,13 +6,14 @@ import Avatar from "./Avatar";
 
 interface IHeader {
 	title?: string | null;
+	src?: string | null;
 }
 
-const Header: FunctionComponent<IHeader> = ({ title }: IHeader) => {
+const Header: FunctionComponent<IHeader> = ({ title, src }: IHeader) => {
 	const { colors, fontSizes } = useTheme();
 	return (
 		<Styled.Box>
-			<Avatar size="2.5rem" />
+			<Avatar src={src} size="2.5rem" />
 			<Shared.Text
 				className="friend-name"
 				size={fontSizes.xl}

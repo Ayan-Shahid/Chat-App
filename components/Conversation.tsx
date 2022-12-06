@@ -73,7 +73,7 @@ const Conversation: FunctionComponent<IConversation> = ({
 	return (
 		<>
 			<Shared.ListItem active={active} onClick={startConversation} as="button">
-				<Avatar size="2.5rem" />
+				<Avatar src={friend?.avatar} size="2.5rem" />
 				<Shared.Column width="100%" gap="0.1rem">
 					<Shared.Text className="friend-name" weight={500}>
 						{friend?.username}

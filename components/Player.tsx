@@ -65,7 +65,7 @@ const Player: FunctionComponent<IPlayer> = ({ src }: IPlayer) => {
 		};
 	}, []);
 	return (
-		<Styled.Box>
+		<Styled.Box className="player">
 			{isPlaying ? (
 				<Styled.Button onClick={setFalse}>
 					<Pause color={colors.white[100]} size="14" />
@@ -78,6 +78,7 @@ const Player: FunctionComponent<IPlayer> = ({ src }: IPlayer) => {
 			<Styled.Input
 				max={duration ? duration : `${duration}`}
 				type="range"
+				className="input"
 				value={trackProgress}
 				step={0.01}
 				onChange={onScrub}

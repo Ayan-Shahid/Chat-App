@@ -27,7 +27,7 @@ const Index: NextPage = () => {
 			{currentUser ? (
 				<Shared.Layout>
 					<TopBar openMenu={toggleMenu} />
-					<NavBar />
+					<NavBar toggleMobileMenu={toggleMenu} />
 					<Chats toggleMobile={menu} />
 					<Chat />
 				</Shared.Layout>

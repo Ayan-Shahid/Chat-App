@@ -13,7 +13,7 @@ const FindPeople: FunctionComponent<IFindPeople> = ({
 }: IFindPeople) => {
 	const { fontSizes } = useTheme();
 	const {
-		state: { users },
+		state: { users, currentUser },
 	} = useContext(AppContext);
 
 	return (
@@ -35,9 +35,11 @@ const FindPeople: FunctionComponent<IFindPeople> = ({
 				/>
 			</Shared.Row>
 			<Shared.SideBarList>
-				{users?.map((item) => (
-					<Friend key={item.id} {...item} />
-				))}
+				{users
+					?.filter((item) => item.id !== currentUser?.uid)
+					.map((item) => (
+						<Friend key={item.id} {...item} />
+					))}
 			</Shared.SideBarList>
 		</Shared.SideBar>
 	);

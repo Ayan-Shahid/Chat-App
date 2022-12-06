@@ -26,13 +26,16 @@ export const Input = styled.input`
 		appearance: none;
 		width: 0.6rem; /* Set a specific slider handle width */
 		height: 0.6rem; /* Slider handle height */
-		background: #04aa6d; /* Green background */
+		background: ${({ theme: { colors } }) =>
+			colors.white[100]}; /* Green background */
 		cursor: pointer; /* Cursor on hover */
+		border-radius: 10rem;
+		transform: translate(-0.01rem, -0.15rem);
 	}
 	&::-webkit-slider-runnable-track {
 		height: 0.3rem;
 		border-radius: 1rem;
-		background: ${({ theme: { colors } }) => colors.primary[100]};
+		background: ${({ theme: { colors } }) => colors.white[100]};
 	}
 	&::-moz-range-thumb {
 		-webkit-appearance: none; /* Override default look */

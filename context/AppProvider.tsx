@@ -1,6 +1,5 @@
-import { auth, firestore } from "database/FireBase";
+import { auth } from "database/FireBase";
 import { onAuthStateChanged } from "firebase/auth";
-import { addDoc, collection } from "firebase/firestore";
 import React, {
 	createContext,
 	FunctionComponent,
@@ -42,14 +41,12 @@ const AppProvider: FunctionComponent = ({ children }) => {
 	// };
 
 	useEffect(() => {
-		let isMounted = true;
 		let unsubscribe;
 
-		if (isMounted) {
-			updateUsers(dispatch);
-			updateConversations(dispatch);
-			updateMessages(dispatch);
-		}
+		updateUsers(dispatch);
+		updateConversations(dispatch);
+		updateMessages(dispatch);
+
 		unsubscribe = onAuthStateChanged(auth, (user) => {
 			dispatch({
 				type: "SET_USER",
